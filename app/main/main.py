@@ -1,12 +1,13 @@
 # Habit tracker app using pixela
 # {'message': "Success. Let's visit https://pixe.la/@rajverma , it is your profile page!", 'isSuccess': True}
-
+import datetime
 import os
 import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 user = os.getenv('username')
+today = datetime.datetime.now()
 endpoint = "https://pixe.la/v1/users"
 graph_endpoint = f"{endpoint}/{user}/graphs"
 headers = {"X-USER-TOKEN": os.getenv('api_key')}
@@ -40,6 +41,7 @@ def create_profile():
 
 post_data = requests.post(url=f"{graph_endpoint}/{graph_workout['id']}",
                           headers=headers,
-                          json={"date": "20221022", "quantity": "250"})
+                          json={"date": today.strftime("%Y%m%d"), "quantity": "300"})
 
-print(post_data.text)
+# do a PUT and DELETE
+# update info and then delete as well, use the same endpoint but different params.
