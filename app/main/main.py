@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 user = os.getenv('username')
 today = datetime.datetime.now()
+update_date = datetime.datetime(year=2022, month=10, day=22)
 endpoint = "https://pixe.la/v1/users"
 graph_endpoint = f"{endpoint}/{user}/graphs"
 headers = {"X-USER-TOKEN": os.getenv('api_key')}
@@ -27,6 +28,8 @@ graph_workout = {"id": "graph2",
                  "type": "float",
                  "color": "ajisai"}
 
+workout_data = {"date": today.strftime("%Y%m%d"), "quantity": "300"}
+
 
 # for creating a new profile
 def create_profile():
@@ -35,13 +38,11 @@ def create_profile():
     return response.json()
 
 
-# post_data = requests.post(url=graph_endpoint, json=graph_workout, headers=headers)
-# print(post_data.headers)
-# print(post_data.text)
+post_data = requests.post(url=graph_endpoint, json=graph_workout, headers=headers)
+print(post_data.headers)
+print(post_data.text)
 
 post_data = requests.post(url=f"{graph_endpoint}/{graph_workout['id']}",
                           headers=headers,
                           json={"date": today.strftime("%Y%m%d"), "quantity": "300"})
 
-# do a PUT and DELETE
-# update info and then delete as well, use the same endpoint but different params.
