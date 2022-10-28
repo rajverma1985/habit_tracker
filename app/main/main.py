@@ -24,11 +24,12 @@ graph_coding = {"id": "graph1",
 
 graph_workout = {"id": "graph2",
                  "name": "workout-graph1",
-                 "unit": "calories",
+                 "unit": "minutes",
                  "type": "float",
                  "color": "ajisai"}
 
-workout_data = {"date": today.strftime("%Y%m%d"), "quantity": "300"}
+coding_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the number of commits:\n")}
+workout_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the workout minutes:\n")}
 
 
 # for creating a new profile
@@ -38,11 +39,15 @@ def create_profile():
     return response.json()
 
 
-post_data = requests.post(url=graph_endpoint, json=graph_workout, headers=headers)
-print(post_data.headers)
-print(post_data.text)
+# for updating any graph "graph"> must have an ID key
+def update_graph(graph):
+    response = requests.put(url=f"{graph_endpoint}/{graph['id']}", headers=headers, json={"unit": graph['unit']})
+    response.raise_for_status()
+    return response.text
 
-post_data = requests.post(url=f"{graph_endpoint}/{graph_workout['id']}",
-                          headers=headers,
-                          json={"date": today.strftime("%Y%m%d"), "quantity": "300"})
 
+# for posting any data
+def post_data(data):
+    response = requests.post(url=f"{graph_endpoint}/{graph_workout['id']}", headers=headers, json=data)
+    response.raise_for_status()
+    return response.text

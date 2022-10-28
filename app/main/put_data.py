@@ -15,7 +15,7 @@ headers = {"X-USER-TOKEN": os.getenv('api_key')}
 
 graph_workout = {"id": "graph2",
                  "name": "workout-graph1",
-                 "unit": "calories",
+                 "unit": "minutes",
                  "type": "float",
                  "color": "ajisai"}
 
@@ -23,7 +23,7 @@ graph_workout = {"id": "graph2",
 # update info and then delete as well, use the same endpoint but different params.
 # https://pixe.la/v1/users/a-know/graphs/test-graph
 
-new_workout_data = {"date": update_date.strftime("%Y%m%d"), "quantity": "250"}
+new_workout_data = {"date": update_date.strftime("%Y%m%d"), "quantity": input("Please enter the workout minutes")}
 update_endpoint = f"{graph_endpoint}/{graph_workout['id']}/{update_date.strftime('%Y%m%d')}"
 response = requests.put(url=update_endpoint, json=new_workout_data, headers=headers)
 print(update_endpoint)
