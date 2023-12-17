@@ -1,0 +1,30 @@
+diff --git a/app/main/main.py b/app/main/main.py
+index 95f6b5c..2935426 100644
+--- a/app/main/main.py
++++ b/app/main/main.py
+@@ -28,7 +28,7 @@ graph_workout = {"id": "graph2",
+                  "type": "float",
+                  "color": "ajisai"}
+ 
+-coding_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the number of commits:\n")}
++# coding_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the number of commits:\n")}
+ workout_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the workout minutes:\n")}
+ 
+ 
+@@ -51,3 +51,6 @@ def post_data(data):
+     response = requests.post(url=f"{graph_endpoint}/{graph_workout['id']}", headers=headers, json=data)
+     response.raise_for_status()
+     return response.text
++
++
++print(post_data(workout_data))
+diff --git a/app/main/put_data.py b/app/main/put_data.py
+index b8f5324..ef9525e 100644
+--- a/app/main/put_data.py
++++ b/app/main/put_data.py
+@@ -26,5 +26,3 @@ graph_workout = {"id": "graph2",
+ new_workout_data = {"date": update_date.strftime("%Y%m%d"), "quantity": input("Please enter the workout minutes")}
+ update_endpoint = f"{graph_endpoint}/{graph_workout['id']}/{update_date.strftime('%Y%m%d')}"
+ response = requests.put(url=update_endpoint, json=new_workout_data, headers=headers)
+-print(update_endpoint)
+-print(response.text)

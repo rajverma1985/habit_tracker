@@ -28,7 +28,7 @@ graph_workout = {"id": "graph2",
                  "type": "float",
                  "color": "ajisai"}
 
-coding_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the number of commits:\n")}
+# coding_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the number of commits:\n")}
 workout_data = {"date": today.strftime("%Y%m%d"), "quantity": input("Please enter the workout minutes:\n")}
 
 
@@ -51,3 +51,6 @@ def post_data(data):
     response = requests.post(url=f"{graph_endpoint}/{graph_workout['id']}", headers=headers, json=data)
     response.raise_for_status()
     return response.text
+
+
+print(post_data(workout_data))

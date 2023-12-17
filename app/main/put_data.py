@@ -26,5 +26,3 @@ graph_workout = {"id": "graph2",
 new_workout_data = {"date": update_date.strftime("%Y%m%d"), "quantity": input("Please enter the workout minutes")}
 update_endpoint = f"{graph_endpoint}/{graph_workout['id']}/{update_date.strftime('%Y%m%d')}"
 response = requests.put(url=update_endpoint, json=new_workout_data, headers=headers)
-print(update_endpoint)
-print(response.text)
